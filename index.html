@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RailGo | Seat Reservation</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="logo">🚆 RailGo</div>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#seats">Book Seats</a>
+        <a href="#mutex">Mutex Test</a>
+    </div>
+</nav>
+
+
+<!-- Hero Banner -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+        <span class="hero-tag">YOUR JOURNEY STARTS HERE</span>
+
+        <h1>Travel Smart.<br>Travel Comfortable.</h1>
+
+        <p>
+            Reserve your favourite seat and enjoy a comfortable journey.
+        </p>
+
+        <a href="#seats" class="hero-button">Book Your Seat →</a>
+    </div>
+
+</section>
+
+
+<main class="container">
+
+    <!-- Welcome -->
+    <section class="welcome">
+        <div>
+            <h2>Welcome to RailGo 👋</h2>
+            <p>Manage your reservations easily and securely.</p>
+        </div>
+
+        <div class="welcome-icon">🎫</div>
+    </section>
+
+
+    <!-- Journey Information -->
+    <section class="journey-card">
+
+        <div class="journey-item">
+            <span>🚉</span>
+            <div>
+                <small>TRAVEL SERVICE</small>
+                <h3>Train / Bus</h3>
+            </div>
+        </div>
+
+        <div class="journey-divider"></div>
+
+        <div class="journey-item">
+            <span>💺</span>
+            <div>
+                <small>SEAT CAPACITY</small>
+                <h3>12 Seats</h3>
+            </div>
+        </div>
+
+        <div class="journey-divider"></div>
+
+        <div class="journey-item">
+            <span>🔒</span>
+            <div>
+                <small>BOOKING SECURITY</small>
+                <h3>Mutex Protected</h3>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Statistics -->
+    <section class="summary">
+
+        <div class="summary-card total-card">
+            <span>🎫</span>
+            <p>Total Seats</p>
+            <h2 id="totalSeats">12</h2>
+        </div>
+
+        <div class="summary-card available-card">
+            <span>🟢</span>
+            <p>Available Seats</p>
+            <h2 id="availableSeats">12</h2>
+        </div>
+
+        <div class="summary-card booked-card">
+            <span>🔴</span>
+            <p>Booked Seats</p>
+            <h2 id="bookedSeats">0</h2>
+        </div>
+
+    </section>
+
+
+    <!-- Seat Booking -->
+    <section class="main-grid" id="seats">
+
+        <div class="booking-card">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">RESERVATION</span>
+                    <h2>Select Your Seat</h2>
+                    <p>Choose an available seat from the layout.</p>
+                </div>
+
+                <span class="heading-icon">💺</span>
+            </div>
+
+            <div class="legend">
+                <span><i class="dot green"></i> Available</span>
+                <span><i class="dot red"></i> Booked</span>
+                <span><i class="dot blue"></i> Selected</span>
+            </div>
+
+            <div class="coach-label">
+                <span>COACH A</span>
+                <span>12 PASSENGERS</span>
+            </div>
+
+            <div id="seatMap" class="seat-map"></div>
+
+        </div>
+
+
+        <!-- Passenger Details -->
+        <div class="booking-card passenger-card">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">PASSENGER DETAILS</span>
+                    <h2>Complete Booking</h2>
+                    <p>Enter passenger information.</p>
+                </div>
+
+                <span class="heading-icon">👤</span>
+            </div>
+
+            <div class="passenger-illustration">
+                <div class="passenger-emoji">🧳</div>
+                <div>
+                    <h3>Ready to travel?</h3>
+                    <p>Complete your seat reservation below.</p>
+                </div>
+            </div>
+
+            <label for="passengerName">Passenger Name</label>
+
+            <input
+                type="text"
+                id="passengerName"
+                placeholder="Enter passenger name"
+            >
+
+            <div class="selected-box">
+                <span>Selected Seat</span>
+                <strong id="selectedSeat">None</strong>
+            </div>
+
+            <button id="bookButton" class="primary-button" type="button">
+                Confirm Booking →
+            </button>
+
+            <button id="cancelButton" class="cancel-button" type="button">
+                Cancel Booking
+            </button>
+
+            <p id="message" class="message"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Mutex Test -->
+    <section class="booking-card mutex-card" id="mutex">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-tag">OS CONCEPT DEMONSTRATION</span>
+                <h2>Simultaneous Booking Test</h2>
+                <p>
+                    Test how Mutex Lock prevents two passengers from
+                    booking the same seat.
+                </p>
+            </div>
+
+            <span class="heading-icon">🔐</span>
+        </div>
+
+        <div class="mutex-information">
+
+            <div class="test-passenger">
+                <span>👤</span>
+                <div>
+                    <strong>Passenger 1</strong>
+                    <small>Booking request</small>
+                </div>
+            </div>
+
+            <div class="versus">VS</div>
+
+            <div class="test-passenger">
+                <span>👤</span>
+                <div>
+                    <strong>Passenger 2</strong>
+                    <small>Booking request</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="test-controls">
+
+            <div>
+                <label for="testSeat">Select a seat for testing</label>
+
+                <select id="testSeat">
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="A3">A3</option>
+                    <option value="A4">A4</option>
+                    <option value="A5">A5</option>
+                    <option value="A6">A6</option>
+                    <option value="A7">A7</option>
+                    <option value="A8">A8</option>
+                    <option value="A9">A9</option>
+                    <option value="A10">A10</option>
+                    <option value="A11">A11</option>
+                    <option value="A12">A12</option>
+                </select>
+            </div>
+
+            <button
+                type="button"
+                id="testButton"
+                class="primary-button"
+                onclick="runSimultaneousTest()">
+
+                Run Simultaneous Booking Test
+
+            </button>
+
+        </div>
+
+        <div id="testResults" class="test-results"></div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <h3>🚆 RailGo</h3>
+        <p>Smart Reservation | Secure Booking | Mutex Lock</p>
+        <small>Train / Bus Seat Reservation System - OS Project</small>
+    </footer>
+
+</main>
+
+
+<script>
+
+// Selected seat
+let selectedSeatId = null;
+
+
+// Display messages
+function showMessage(message, type) {
+
+    const messageBox = document.getElementById("message");
+
+    messageBox.textContent = message;
+    messageBox.className = "message " + type;
+
+}
+
+
+// Load seat information
+async function loadSeats() {
+
+    try {
+
+        const response = await fetch("/api/seats");
+
+        if (!response.ok) {
+            throw new Error("Unable to load seats");
+        }
+
+        const seats = await response.json();
+
+        const seatMap = document.getElementById("seatMap");
+
+        seatMap.innerHTML = "";
+
+        let available = 0;
+        let booked = 0;
+
+        Object.entries(seats).forEach(([seatId, details]) => {
+
+            const button = document.createElement("button");
+
+            button.type = "button";
+            button.textContent = seatId;
+            button.className = "seat";
+
+            if (details.status === "Booked") {
+
+                button.classList.add("booked");
+                booked++;
+
+            } else {
+
+                button.classList.add("available");
+                available++;
+
+            }
+
+            if (selectedSeatId === seatId) {
+                button.classList.add("selected");
+            }
+
+            button.addEventListener("click", () => {
+
+                selectedSeatId = seatId;
+
+                document.getElementById("selectedSeat").textContent =
+                    seatId;
+
+                loadSeats();
+
+            });
+
+            seatMap.appendChild(button);
+
+        });
+
+        document.getElementById("totalSeats").textContent =
+            Object.keys(seats).length;
+
+        document.getElementById("availableSeats").textContent =
+            available;
+
+        document.getElementById("bookedSeats").textContent =
+            booked;
+
+    } catch (error) {
+
+        showMessage("Unable to load seats.", "error");
+
+    }
+
+}
+
+
+// Book a seat
+document.getElementById("bookButton").addEventListener("click", async () => {
+
+    const passenger =
+        document.getElementById("passengerName").value.trim();
+
+    if (!selectedSeatId) {
+        showMessage("Please select a seat.", "error");
+        return;
+    }
+
+    if (!passenger) {
+        showMessage("Please enter passenger name.", "error");
+        return;
+    }
+
+    try {
+
+        const response = await fetch("/api/book", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                seat: selectedSeatId,
+                passenger: passenger
+            })
+
+        });
+
+        const result = await response.json();
+
+        showMessage(
+            result.message,
+            result.success ? "success" : "error"
+        );
+
+        if (result.success) {
+
+            selectedSeatId = null;
+
+            document.getElementById("selectedSeat").textContent = "None";
+
+            document.getElementById("passengerName").value = "";
+
+        }
+
+        await loadSeats();
+
+    } catch (error) {
+
+        showMessage("Booking failed. Please try again.", "error");
+
+    }
+
+});
+
+
+// Cancel booking
+document.getElementById("cancelButton").addEventListener("click", async () => {
+
+    if (!selectedSeatId) {
+        showMessage("Please select a seat to cancel.", "error");
+        return;
+    }
+
+    try {
+
+        const response = await fetch("/api/cancel", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                seat: selectedSeatId
+            })
+
+        });
+
+        const result = await response.json();
+
+        showMessage(
+            result.message,
+            result.success ? "success" : "error"
+        );
+
+        if (result.success) {
+
+            selectedSeatId = null;
+
+            document.getElementById("selectedSeat").textContent = "None";
+
+        }
+
+        await loadSeats();
+
+    } catch (error) {
+
+        showMessage("Cancellation failed.", "error");
+
+    }
+
+});
+
+
+// Simultaneous booking test
+async function runSimultaneousTest() {
+
+    const seat = document.getElementById("testSeat").value;
+
+    const resultsBox = document.getElementById("testResults");
+
+    const testButton = document.getElementById("testButton");
+
+    resultsBox.textContent = "Running test...";
+
+    testButton.disabled = true;
+
+    try {
+
+        const response = await fetch("/api/simultaneous-test", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                seat: seat
+            })
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Test failed");
+        }
+
+        resultsBox.innerHTML = "";
+
+        const heading = document.createElement("h3");
+
+        heading.textContent = "Test Results for Seat " + result.seat;
+
+        resultsBox.appendChild(heading);
+
+        let successful = 0;
+        let rejected = 0;
+
+        result.results.forEach(item => {
+
+            const paragraph = document.createElement("p");
+
+            paragraph.textContent =
+                item.passenger + ": " + item.result;
+
+            resultsBox.appendChild(paragraph);
+
+            if (item.result === "Booking successful") {
+                successful++;
+            } else {
+                rejected++;
+            }
+
+        });
+
+        const summary = document.createElement("h3");
+
+        summary.textContent =
+            "Successful bookings: " + successful +
+            " | Rejected bookings: " + rejected;
+
+        resultsBox.appendChild(summary);
+
+        if (successful === 1 && rejected === 1) {
+
+            const status = document.createElement("p");
+
+            status.textContent =
+                "MUTEX LOCK SUCCESS: Only one passenger booked the seat.";
+
+            status.className = "success";
+
+            resultsBox.appendChild(status);
+
+        }
+
+        selectedSeatId = null;
+
+        document.getElementById("selectedSeat").textContent = "None";
+
+        await loadSeats();
+
+    } catch (error) {
+
+        resultsBox.textContent = error.message;
+
+    } finally {
+
+        testButton.disabled = false;
+
+    }
+
+}
+
+
+// Initial loading
+loadSeats();
+
+</script>
+
+</body>
+</html>
